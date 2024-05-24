@@ -1,0 +1,134 @@
+{% include 'base.html' %} {% load static %} {% block content %}
+<section class="home-sect">
+  <div class="header">
+    <h1 class="header-title">Welcome to Boon Auto-Spares and Garage</h1>
+  </div>
+
+  <section class="sect-two">
+    {% for slide in slides %}
+    <img src="{{ slide.image.url }}" alt="" />
+    <div class="info">
+      <h4>{{ slide.title }}</h4>
+      <p>{{ slide.description }}</p>
+    </div>
+    {% endfor %}
+  </section>
+
+  <script>
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+      var slides = $(".sect-two img"); // Select all images within .sect-two
+      var titles = $(".sect-two h4"); // Select all h4 elements within .sect-two
+      var descriptions = $(".sect-two p"); // Select all p elements within .sect-two
+
+      for (var i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+        titles[i].style.display = "none";
+        descriptions[i].style.display = "none";
+      }
+
+      slideIndex++;
+      if (slideIndex > slides.length) {
+        slideIndex = 1;
+      }
+
+      slides[slideIndex - 1].style.display = "block";
+      titles[slideIndex - 1].style.display = "block";
+      descriptions[slideIndex - 1].style.display = "block";
+
+      setTimeout(showSlides, 6000); // Change slide every 6 seconds
+    }
+  </script>
+
+  <!-- {% if categories %}
+  <div class="slide-sect">
+    <h4 class="cat-title">Categories</h4>
+    <div class="slides">
+      {% for category in categories %}
+      <a href="">{{ category.title }}</a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %} -->
+
+  <!-- <div class="slide-sect">
+    <h4 class="cat-title">Vehicles</h4>
+    <div class="slides">
+      {% for vehicle in vehicles %}
+      <div class="vehicle-card">
+        <img src="{{ vehicle.image.url }}" alt="" />
+        <h5>{{ vehicle.title }}</h5>
+      </div>
+      {% endfor %}
+    </div>
+  </div> -->
+
+  <!-- <div class="sub-cats">
+    <h4 class="sub-title">Sub-Categories</h4>
+
+    <select name="subcategories" class="sub-select" id="subcategories">
+      <option value="sub1">Sub cat 1</option>
+      <option value="sub2">Sub cat 2</option>
+      <option value="sub3">Sub cat 3</option>
+      <option value="sub4">Sub cat 4</option>
+      <option value="sub5">Sub cat 5</option>
+      <option value="sub6">Sub cat 6</option>
+    </select>
+  </div> -->
+  <h2 class="products-heading">Our Products</h2>
+
+  <div class="content">
+    {% for product in random_products %}
+    <div class="card">
+      <img class="product-img" src="{{ product.image.url }}" alt="" />
+      <h4>{{ product.title }}</h4>
+      <p>Kshs. {{ product.price }}</p>
+      <a href="{% url 'product_detail' product.id %}">View Product</a>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="view-more">
+    <a href="{% url 'products' %}">View More</a>
+  </div>
+
+  <section class="comments-sect">
+    <h3>What Our Customers Say</h3>
+
+    <div class="comments">
+      {% for comment in comments %}
+      <div class="comment">
+        <img src="static/images/profile.png" alt="" />
+        <p>{{ comment.comment_text }}</p>
+        <h5>{{ comment.name }}</h5>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="leave-comment">
+    <h3>Leave a Comment</h3>
+
+    <form action="{% url 'submit_comment' %}" method="post">
+      {% csrf_token %}
+      <input
+        style="border: 1px solid skyblue; padding: 7px 10px"
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Your Name"
+        required
+      />
+      <textarea
+        name="comment_text"
+        id="comment_text"
+        cols="30"
+        rows="10"
+      ></textarea>
+      <input style="background-color: skyblue" type="submit" value="Comment" />
+    </form>
+  </section>
+</section>
+{% endblock %}

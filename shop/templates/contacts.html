@@ -1,0 +1,50 @@
+{% extends 'base.html' %} {% block content %}
+<section class="contacts-sect">
+  <form class="contact-form" method="post">
+    {% csrf_token %}
+    <h1>Contact Us</h1>
+    {% if error_message %}
+    <p style="color: red">{{ error_message }}</p>
+    {% endif %}
+    <label for="name">Name:</label>
+    <input
+      style="border: 1px solid skyblue"
+      id="contacts-input"
+      name="name"
+      placeholder="Enter your name"
+      type="text"
+    />
+    <label for="email">Email:</label>
+    <input
+      style="border: 1px solid skyblue"
+      id="contacts-input"
+      name="email"
+      placeholder="Enter your email"
+      type="email"
+    />
+    <label for="message">Message:</label>
+    <textarea
+      name="message"
+      placeholder="Enter your message"
+      cols="30"
+      rows="10"
+    ></textarea>
+    <input type="submit" value="Submit" />
+  </form>
+
+  <div class="other-contacts">
+    <div class="contact">
+      <p>Whatsapp: (+254795663243)</p>
+      <img src="{% static 'images/whatsapp.png' %}" alt="" />
+    </div>
+    <div class="contact">
+      <p>Instagram: (@its_spares_shop)</p>
+      <img src="{% static 'images/ig.png' %}" alt="" />
+    </div>
+    <div class="contact">
+      <p>Twitter: (@its_spares_shop)</p>
+      <img src="{% static 'images/twitter.png' %}" alt="" />
+    </div>
+  </div>
+</section>
+{% endblock %}

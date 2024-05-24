@@ -1,0 +1,48 @@
+{% include 'base.html' %} {% load static %} {% block content %}
+{% if product %}
+<section class="info-sect">
+  <div class="images-sect">
+    <img id="img-main" class="main-img" src="{{ product.image.url }}" alt="" />
+    <div class="other-images">
+      <img id="one" src="{% static 'images/sus1.png' %}" alt="" />
+      <img id="two" src="{% static 'images/sus2.png' %}" alt="" />
+      <img id="three" src="{% static 'images/sus1.png' %}" alt="" />
+      <img id="four" src="{% static 'images/sus2.png' %}" alt="" />
+    </div>
+  </div>
+
+  <div class="details-sect">
+    <h1>{{ product.title }}</h1>
+    <h4>Car: <span>{{ product.vehicle }}</span></h4>
+    <h3>Kshs. {{ product.price }}</h3>
+    <p>
+      {{product.description }}
+    </p>
+    <a href="">Inquire Now</a>
+</section>
+
+{% endif %}
+<script>
+    const mainImg = document.getElementById("img-main");
+    const one = document.getElementById("one");
+    const two = document.getElementById("two");
+    const three = document.getElementById("three");
+    const four = document.getElementById("four");
+
+    one.addEventListener("click", () => {
+      mainImg.src = one.src;
+    })
+
+    two.addEventListener("click", () => {
+      mainImg.src = two.src;
+    })
+
+    three.addEventListener("click", () => {
+      mainImg.src = three.src;
+    })
+
+    four.addEventListener("click", () => { 
+      mainImg.src = four.src;
+    })
+</script>
+{% endblock %}

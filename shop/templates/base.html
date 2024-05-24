@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="main-nav">
+      <h4 class="logo">
+        <a href="{% url 'index' %}">Boon Auto-Shop</a>
+      </h4>
+
+      <ul class="first-menu">
+        <li><p>+254795663243</p></li>
+        <li class="menu-item">
+          <img src="{% static 'images/whatsapp.png' %}" alt="" />
+        </li>
+        <li class="menu-item">
+          <img src="{% static 'images/ig.png' %}" alt="" />
+        </li>
+      </ul>
+    </nav>
+
+    <nav class="bottom-nav">
+      <ul id="btm" class="bottom-menu">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'products' %}">Products</a></li>
+        <li><a href="{% url 'contacts' %}">Contacts</a></li>
+        <li><a href="{% url 'about' %}">About Us</a></li>
+      </ul>
+
+      <form class="search-form" action="{% url 'search' %}" method="GET">
+        <!-- Update action attribute -->
+        <input type="text" name="q" placeholder="Search" />
+        <!-- Add name attribute for the search query -->
+        <input type="submit" value="Search" />
+      </form>
+      <div id="right" class="menu-toggle right">
+        <i id="right-menu" class="fas fa-bars"></i>
+      </div>
+    </nav>
+
+    {% block content %} {% endblock %}
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </body>
+</html>

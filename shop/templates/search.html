@@ -1,0 +1,26 @@
+{% include 'base.html' %} {% load static %} {% block content %}
+<div class="slide-sect">
+  <h4 class="cat-title">Categories</h4>
+  <div class="slides">
+    <a href="{% url 'products' %}">All</a>
+    {% for category in categories %}
+    <a href="{% url 'search' %}?category_id={{ category.id }}&q={{query}}"
+      >{{ category.title }}</a
+    >
+    {% endfor %}
+  </div>
+</div>
+
+<div class="content">
+  {% if products %} {% for product in products %}
+  <div class="card">
+    <img class="product-img" src="{{ product.image.url }}" alt="" />
+    <h4>{{ product.title }}</h4>
+    <p>kSHS. {{ product.price }}</p>
+    <a href="{% url 'product_detail' product.id %}">View Product</a>
+  </div>
+  {% endfor %} {% else %}
+  <p>No products found.</p>
+  {% endif %}
+</div>
+{% endblock %}
